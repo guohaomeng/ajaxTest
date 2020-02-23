@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://www.jq22.com/jquery/jquery-2.1.1.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <p>
+        有这么几个数据接口
+    </p>
+    <p>
+        /getdata <br>
+        get方法，服务器返回一串文本字符
+    </p>
+    <p>
+        /getjson <br>
+        get方法，服务器返回json内容
+    </p>
+    <p>
+        /getfile <br>
+        get方法，服务器返回一个文件test.txt
+    </p>
+    <p>
+        /reset <br>
+        get方法，服务器重置计数次数
+    </p>
+    <p>
+        /poststh <br>
+        post方法，服务器接受post的内容并写入text.txt <br>
+        <a href="http://127.0.0.1:8083/public/test.txt"> text.txt文件可点击此处查看 </a>
+    </p>
+    <h1 id="test">之前的数据</h1>
+    <button id="button1">ajax测试</button>
+    <button id="button2">重置服务器计数</button> <br> <br>
+    <input type="text" name="test1" value="">
+    <button id="button3">post</button>
+
+
+
+    <script>
+        $(document).ready(function () {
+            var testUrl = 'http://49.233.131.188:8083';//设置测试服务器地址及端口
+            $("#button1").click(function () {
+                $.ajax({
+                    url: testUrl + '/getdata',
+                    data: "",
+                    dataType: 'text',
+                    type: 'get',
+                    success: function (data) {
+                        console.log(data);
+                        $("#test").text(data);
+                    },
+                    error: function () {
+                        console.log("发生错误");
+                    }
+                })
+                return false;
+            });
+            $("#button3").click(function () {
+                var testData = $('input[name="test1"]').val();
+                $.ajax({
+                    url: testUrl + '/poststh',
+                    data: testData,
+                    dataType: 'text',
+                    type: 'post',
+                    success: function (data) {
+                        console.log(data);
+                        $("#test").text(data);
+                        $("#test").append("  具体数据：" + testData);
+                    },
+                    error: function () {
+                        console.log("发生错误");
+                    }
+                })
+                return false;
+            });
+            $("#button2").click(function () {
+                $.ajax({
+                    url: testUrl + '/reset',
+                    data: "",
+                    dataType: 'text',
+                    type: 'get',
+                    success: function (data) {
+                        console.log(data);
+                        $("#test").text(data);
+                    },
+                    error: function () {
+                        console.log("发生错误");
+                    }
+                })
+                return false;
+            });
+        });
+    </script>
+</body>
+
+</html>
