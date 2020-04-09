@@ -32,7 +32,7 @@
     <p>
         /poststh <br>
         post方法，服务器接受post的内容并写入text.txt <br>
-        <a href="http://127.0.0.1:8083/public/test.txt"> text.txt文件可点击此处查看 </a>
+        <a id="m1" href="#"> text.txt文件可点击此处查看 </a>
     </p>
     <h1 id="test">之前的数据</h1>
     <button id="button1">ajax测试</button>
@@ -45,6 +45,7 @@
     <script>
         $(document).ready(function () {
             var testUrl = 'http://49.233.131.188:8083';//设置测试服务器地址及端口
+            $("#m1").href = testUrl + "/public/test.txt" ;
             $("#button1").click(function () {
                 $.ajax({
                     url: testUrl + '/getdata',
